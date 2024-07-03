@@ -2,7 +2,7 @@
 layout: post
 cover: 'assets/images/cover7.jpg'
 navigation: True
-title: The Businessman & the fisherman
+title: DFS/BFS, Tree 탐색 알고리즘
 date: 2014-08-12 10:18:00
 tags: fables fiction
 subclass: 'post tag-test tag-content'

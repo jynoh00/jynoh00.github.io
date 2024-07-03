@@ -2,7 +2,7 @@
 layout: post
 cover: 'assets/images/cover5.jpg'
 navigation: True
-title: The Purpose of Education
+title: Dijkstra 알고리즘, 최단 경로 문제
 date: 1948-12-12 10:18:00
 tags: speeches fiction
 subclass: 'post tag-speeches'

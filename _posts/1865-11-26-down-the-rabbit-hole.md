@@ -2,7 +2,7 @@
 layout: post
 cover: 'assets/images/cover1.jpg'
 navigation: True
-title: Down The Rabbit Hole
+title: Greedy 알고리즘, 탐욕법
 date: 1865-11-26 10:18:00
 tags: fiction
 subclass: 'post tag-fiction'

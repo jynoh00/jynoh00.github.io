@@ -8,7 +8,7 @@ language: 'en-uk'
 
 # Website info
 name: 'Per aspera ad astra'
-description: "soongsil univ. Department of Electronics and Information Engineering, jynoh00 <한글 테스트>"
+description: "역경을 헤치고 별을 향하여<br>jynoh00 - Development blog."
 
 short_url: 'jekyllt.github.io/jasper/'
 google_analytics: UA-69281367-1

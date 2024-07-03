@@ -2,7 +2,7 @@
 layout: post
 cover: false
 navigation: false
-title: Gettysburg Address
+title: 코딩 테스트 정리
 date: 1863-11-19 10:18:00
 tags: fiction
 subclass: 'post tag-fiction'

@@ -2,7 +2,7 @@
 layout: post
 cover: 'assets/images/cover2.jpg'
 navigation: True
-title: Looking-Glass house
+title: '자료구조 기본 : Stack, queue, deque'
 date: 1871-03-18 10:18:00
 tags: fiction
 subclass: 'post tag-fiction'
