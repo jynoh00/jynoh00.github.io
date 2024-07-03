@@ -7,8 +7,8 @@ paginate: 5
 language: 'en-uk'
 
 # Website info
-name: 'Finding The Way Home'
-description: "A beautiful narrative written with the world's most elegant publishing platform. The story begins here."
+name: 'Per aspera ad astra'
+description: "soongsil univ. Department of Electronics and Information Engineering, jynoh00 <한글 테스트>"
 
 short_url: 'jekyllt.github.io/jasper/'
 google_analytics: UA-69281367-1
