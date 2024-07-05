@@ -10,4 +10,4 @@ current: about
 
 
 
-<center> jynoh00 - development blog </center>
+<h5><center> jynoh00 - development blog </center></h5>

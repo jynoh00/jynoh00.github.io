@@ -50,8 +50,8 @@ repo: jynoh00.github.io
 branch: source
 relative_source: ../jasper/
 destination: ../jasper-pages/
-production_url:  https://jynoh00.github.io/jasper/
-source_url:  https://github.com/jynoh00/jasper/
+production_url:  https://github.com/jynoh00/jynoh00.github.io
+source_url:  https://github.com/jynoh00/jynoh00.github.io
 
 exclude:
   - README.md
