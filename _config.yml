@@ -7,14 +7,14 @@ paginate: 5
 language: 'ko-KR'
 
 # Website info
-name: 'Per aspera ad astra - test3'
+name: 'Per aspera ad astra - test4'
 description: "역경을 헤치고 별을 향하여<br>jynoh00 - Development blog."
 
 short_url: 'jynoh00.github.io'
 google_analytics: UA-69281367-1
 disqus: username
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl: /
+baseurl: /jynoh00.github.io/
 
 # Permalinks
 permalink: /:title
@@ -48,8 +48,8 @@ lsi: false
 username: jynoh00
 repo: jynoh00.github.io
 branch: source
-relative_source: ../
-destination: ../
+relative_source: ../jasper/
+destination: ../jasper-pages/
 production_url:  https://github.com/jynoh00/jynoh00.github.io
 source_url:  https://github.com/jynoh00/jynoh00.github.io
 
