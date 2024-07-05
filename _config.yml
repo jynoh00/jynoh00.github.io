@@ -4,13 +4,13 @@
 markdown: kramdown
 highlighter: rouge
 paginate: 5
-language: 'en-uk'
+language: 'ko-KR'
 
 # Website info
 name: 'Per aspera ad astra'
 description: "역경을 헤치고 별을 향하여<br>jynoh00 - Development blog."
 
-short_url: 'jekyllt.github.io/jasper/'
+short_url: 'jynoh00.github.io'
 google_analytics: UA-69281367-1
 disqus: username
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
@@ -45,9 +45,9 @@ plugins: [jekyll-paginate]
 # or "master" otherwise
 safe: false
 lsi: false
-username: jekyllt
-repo: jasper
-branch: master
+username: jynoh00
+repo: jynoh00.github.io
+branch: source
 relative_source: ../jasper/
 destination: ../jasper-pages/
 production_url:  https://jekyllt.github.io/jasper/
