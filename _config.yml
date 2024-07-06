@@ -16,26 +16,24 @@ sass:
 markdown: kramdown
 highlighter: rouge
 plugins: [jekyll-paginate]
-paginate: 5   # 홈페이지에 처음 보일 게시글 개수
+paginate: 3   # 홈페이지에 처음 보일 게시글 개수
 
 navigation:
     - title: Home
       url: /index.html
     - title: About
       url: /about
-    - title: Contact
-      url: /contact
 
 social:
-    github: brianmaierjr
-    twitter: brianmaierjr
-    facebook: brianmaierjr
-    email: brimaidesigns@gmail.com
-    linkedin: brianmaierjr
-    youtube: RickAstleyYT
-    tumblr: i-am-a-fish
+    github: jynoh00
+    twitter: null
+    facebook: null
+    email: wndus123sh@naver.com
+    linkedin: null
+    youtube: null
+    tumblr: null
 
 google_analytics: "UA-58263416-1"
 
 disqus:
-    shortname: brianmaierjr
+    shortname: jynoh00
