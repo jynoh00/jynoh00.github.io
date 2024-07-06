@@ -4,10 +4,10 @@ title: 푸른 밤 - 나희덕
 date: 2024-07-07
 categories: poetry
 ---
-## <center>푸른 밤</center>
+## 푸른 밤
 
-#### <center>나희덕</center>
-<center>
+#### 나희덕
+
 <br>
 <br>
 너에게로 가지 않으려고 미친 듯 걸었던 <br>
@@ -32,4 +32,3 @@ categories: poetry
 나의 생애는<br> 
 모든 지름길을 돌아서<br> 
 네게로 난 단 하나의 에움길이었다<br>
-</center>
