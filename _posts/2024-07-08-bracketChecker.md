@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 괄호 검사 알고리즘
-date: 2024-07-08
+date: 2024-07-08 21:30:00 +0900
 categories: algorithm
 ---
 #### 괄호 검사
@@ -78,7 +78,39 @@ ch값과 top값을 비교하여, 괄호 매칭이 옳바르지 않다면 false�
 
 <br>
 
-#### 2. main() 함수 예제
+
+#### 2. C++ STL 사용, 괄호 검사 알고리즘
+```c++
+#include <iostream>
+#include <string>
+#include <stack> // stack STL include
+
+#define MAX 100
+using namespace std;
+
+bool isBalanced(string str){
+    stack<char> s;
+    for (char ch : str){
+        if (ch == '(' || ch == '{' || ch == '['){
+            s.push(ch);
+        }else if (ch == ')' || ch == '}' || ch == ']'){
+            if (s.isEmpty()){
+                return false;
+            }
+            char top = s.top();
+            s.pop();
+            if ((ch == ')' && top != '(') || (ch == '}' && top != '{') || (ch == ']' && top != '[')){
+                return false;
+            }
+        }
+    }
+    return s.isEmpty();
+}
+```
+isBalanced함수는 앞서 설명한 것과 같은 기능을 수행한다.
+
+
+#### 3. main() 함수 예제
 ```c++
 int main(){
     string str[3] = {"sadadadsd()d{dasd[d]d}", "dgfdgsdkj([]){}asdddd[ddf]", "[dfvfsad{]}()asd{df}"};
@@ -93,7 +125,7 @@ int main(){
 }
 ```
 
-#### 3. output
+#### 4. output
 ```yml
 괄호 검사 이상 없음
 괄호 검사 이상 없음
@@ -101,8 +133,10 @@ int main(){
 ```
 <br>
 
+
+
 * * *
-<br><br>
+<br>
 
 >메모, 
 <br>괄호 검사 알고리즘은 스택을 사용하면 쉽게 구현할 수 있다.

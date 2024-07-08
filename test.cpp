@@ -1,57 +1,66 @@
 #include <iostream>
 using namespace std;
-#define MAX_STACK_SIZE 100
 
-class Stack{
+#define MAX 5
+#define PUSH 1
+#define POP 2
+class Queue{
 private:
-    int top;
-    char array[MAX_STACK_SIZE];
+    int front;
+    int rear;
+    int lastOp;
+    int data[MAX];
 public:
-    Stack(){ top = -1; }
-    ~Stack(){}
-    bool isEmpty(){ return top == -1; }
-    bool isFull(){ return top == MAX_STACK_SIZE -1; }
-    void push(int i){
-        if(!isFull()) array[++top] = i;
-        else return;
+    Queue(){
+        front = 0;
+        rear = 0;
+        lastOp = 0;
     }
-    char pop(){
-        if(!isEmpty()){ return array[top--]; }
+    ~Queue(){}
+    int isEmpty(){
+        if(front == rear && lastOp != PUSH){
+            return 1;
+        }else return 0;
     }
-    void display(){
-        for (int i = 0; i <= top; i++){
-            cout << array[i] << " ";
+    bool isFull(){
+        if(front == rear && lastOp == PUSH) return 1;
+        else return 0;
+    }
+    void enqueue(int i){
+        if (!isFull()){
+            rear = (rear+1)%MAX;
+            this->data[rear] = i;
+            lastOp = PUSH;
+        }
+    }
+    int dequeue(){
+        if(!isEmpty()){
+            lastOp = POP;
+            front = (front+1)%MAX;
+            return data[front];
+        }
+        return 0;
+    }
+    void printQ(){
+        int numberOfQ;
+        numberOfQ = rear > front ? rear-front : (rear+MAX) - front;
+        int index = front +1;
+        for (int i = 0; i < numberOfQ; i++){
+            cout << data[(index+i)%MAX] << " ";
         }
         cout << endl;
     }
 };
 
-bool isBalanced(string str){
-    Stack s;
-    for (char ch : str){
-        if (ch == '(' || ch == '{' || ch == '['){
-            s.push(ch);
-        }else if (ch == ')' || ch == '}' || ch == ']'){
-            if (s.isEmpty()){
-                return false;
-            }
-            char top = s.pop();
-            if ((ch == ')' && top != '(') || (ch == '}' && top != '{') || (ch == ']' && top != '[')){
-                return false;
-            }
-        }
-    }
-    return s.isEmpty();
-}
-
 int main(){
-    string str[3] = {"sadadadsd()d{dasd[d]d}", "dgfdgsdkj([]){}asdddd[ddf]", "[dfvfsad{]}()asd{df}"};
-    for (string s : str){
-        if (isBalanced(s)){
-            cout << "괄호 검사 이상 없음" << endl;
-        }else{
-            cout << "괄호 검사 이상 발생" << endl;
-        }
-    }
-    return 0;
+    Queue q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    q.enqueue(6);
+    cout << q.dequeue() << endl;
+    q.enqueue(9);
+    q.printQ();
 }
