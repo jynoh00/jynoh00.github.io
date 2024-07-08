@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 괄호 검사 알고리즘
+title: "[알고리즘] 괄호 검사"
 date: 2024-07-08 21:30:00 +0900
 categories: algorithm
 ---

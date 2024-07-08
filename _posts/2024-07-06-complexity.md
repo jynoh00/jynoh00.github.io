@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 시간 복잡도와 공간 복잡도
+title: "[알고리즘] 시간 복잡도와 공간 복잡도"
 date: 2024-07-06
 categories: algorithm
 ---
