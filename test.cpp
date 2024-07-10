@@ -1,23 +1,87 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
+class TreeNode{
+private:
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+public:
+    TreeNode(int d = 0, TreeNode* l = nullptr, TreeNode* r = nullptr){
+        data = d;
+        left = l;
+        right = r;
+    }
+    void setData(int d){ data = d; }
+    void setLeft(TreeNode* l){ left = l; }
+    void setRight(TreeNode* r){ right = r; }
+    int getData(){ return data; }
+    TreeNode* getLeft(){ return left; }
+    TreeNode* getRight(){ return right; }
+};
+
+class BinaryTree{
+private:
+    TreeNode* root;
+public:
+    BinaryTree(TreeNode* r = nullptr){ root = r; }
+    void setRoot(TreeNode* r){ root = r; }
+    bool isEmpty(){ return root == nullptr; }
+
+    void preorder(){
+        cout << "preorder: ";
+        preorder(root);
+        cout << endl;
+    }
+    void preorder(TreeNode* r){
+        if(r){
+            cout << r->getData() << " ";
+            preorder(r->getLeft());
+            preorder(r->getRight());
+        }
+    }
+
+    //inorder
+    void inorder(){
+        cout << "inorder: ";
+        inorder(root);
+        cout << endl;
+    }
+    void inorder(TreeNode* r){
+        if(r){
+            inorder(r->getLeft());
+            cout << r->getData() << " ";
+            inorder(r->getRight());
+        }
+    }
+
+    //postorder
+    void postorder(){
+        cout << "postorder: ";
+        postorder(root);
+        cout << endl;
+    }
+    void postorder(TreeNode* r){
+        if(r){
+            postorder(r->getLeft());
+            postorder(r->getRight());
+            cout << r->getData() << " ";
+        }
+    }
+};
+
 int main(){
-    vector<int>v = { 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    TreeNode n1 = {1, nullptr, nullptr};
+    TreeNode n2 = {16, nullptr, nullptr};
+    TreeNode n3 = {25, nullptr, nullptr};
+    TreeNode n4 = {4, &n1, nullptr};
+    TreeNode n5 = {20, &n2, &n3};
+    TreeNode n6 = {15, &n4, &n5};
 
-    cout << v.size() << endl;    // 9
-    cout << v.capacity() << endl; // 9
+    BinaryTree t;
+    t.setRoot(&n6);
 
-    v.reserve(120); // 벡터의 capacity를 지정, 인자에 현 capacity보다 적은 값이 들어가면 현 capacity 유지
-    cout << v.capacity() << endl; // 120
-
-    v.shrink_to_fit(); // 벡터의 capacity를 size에 맞게
-    cout << v.capacity() << endl; // 9
-
-    cout << v.empty() << endl; // 0
-    v.clear();
-    cout << v.empty() << endl; // 1
-    cout << v.capacity() << endl; // clear로 원소를 모두 제거하여도 capacity는 유지된다.
-    vector<int>().swap(v);
-    cout << v.capacity() << endl; // 빈 벡터 공간과 swap을 통해 capacity를 0으로 바꾸는 방법
+    t.preorder();
+    t.postorder();
+    t.inorder();
 }
