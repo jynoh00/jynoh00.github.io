@@ -1,12 +1,15 @@
 
-    g.insertEdge(0, 1); // A-B
-    g.insertEdge(0, 2); // A-C
-    g.insertEdge(0, 3); // A-D
-    g.insertEdge(1, 4); // B-E
-    g.insertEdge(2, 5); // C-F
-    g.insertEdge(3, 7); // D-H
-    g.insertEdge(4, 5); // E-F 
-    g.insertEdge(4, 6); // E-G
-    g.insertEdge(5, 7); // F-H
-    g.insertEdge(6, 8); // G-I
-    g.insertEdge(7, 8); // H-I
+
+    cout << v.size() << endl;    //output : 4
+    cout << v.capacity() << endl; //output : 10 (컴파일 환경에 따라 달라질 수 있음)
+
+    v.reserve(6);
+    cout << v.capacity() << endl; //output : 6
+    cout << v.max_size() << endl; //output : 1073741823(시스템 성능에 따라 달라질 수 있음)
+
+    v.shrink_to_fit();
+    cout << v.capacity() << endl; //output : 4
+
+    cout << v.empty() << endl; //output : false
+    v.clear();
+    cout << v.empty() << endl; //output : true​
