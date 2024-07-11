@@ -1,87 +1,48 @@
 #include <iostream>
+#include <set>
+#include <vector>
 using namespace std;
 
-class TreeNode{
-private:
-    int data;
-    TreeNode* left;
-    TreeNode* right;
-public:
-    TreeNode(int d = 0, TreeNode* l = nullptr, TreeNode* r = nullptr){
-        data = d;
-        left = l;
-        right = r;
-    }
-    void setData(int d){ data = d; }
-    void setLeft(TreeNode* l){ left = l; }
-    void setRight(TreeNode* r){ right = r; }
-    int getData(){ return data; }
-    TreeNode* getLeft(){ return left; }
-    TreeNode* getRight(){ return right; }
-};
-
-class BinaryTree{
-private:
-    TreeNode* root;
-public:
-    BinaryTree(TreeNode* r = nullptr){ root = r; }
-    void setRoot(TreeNode* r){ root = r; }
-    bool isEmpty(){ return root == nullptr; }
-
-    void preorder(){
-        cout << "preorder: ";
-        preorder(root);
-        cout << endl;
-    }
-    void preorder(TreeNode* r){
-        if(r){
-            cout << r->getData() << " ";
-            preorder(r->getLeft());
-            preorder(r->getRight());
-        }
-    }
-
-    //inorder
-    void inorder(){
-        cout << "inorder: ";
-        inorder(root);
-        cout << endl;
-    }
-    void inorder(TreeNode* r){
-        if(r){
-            inorder(r->getLeft());
-            cout << r->getData() << " ";
-            inorder(r->getRight());
-        }
-    }
-
-    //postorder
-    void postorder(){
-        cout << "postorder: ";
-        postorder(root);
-        cout << endl;
-    }
-    void postorder(TreeNode* r){
-        if(r){
-            postorder(r->getLeft());
-            postorder(r->getRight());
-            cout << r->getData() << " ";
-        }
-    }
-};
-
 int main(){
-    TreeNode n1 = {1, nullptr, nullptr};
-    TreeNode n2 = {16, nullptr, nullptr};
-    TreeNode n3 = {25, nullptr, nullptr};
-    TreeNode n4 = {4, &n1, nullptr};
-    TreeNode n5 = {20, &n2, &n3};
-    TreeNode n6 = {15, &n4, &n5};
+    set<int> s;
+    s.insert(16);
+    s.insert(27);
+    s.insert(10);
+    s.insert(30);
 
-    BinaryTree t;
-    t.setRoot(&n6);
+    set<int>::iterator iter = s.emplace_hint(s.begin(), 101);
+    s.emplace_hint(iter, 1);
 
-    t.preorder();
-    t.postorder();
-    t.inorder();
+    for (int i : s){cout << i << " ";}
+    cout << endl;
+
+    for (auto iter2 = s.begin(); iter2 != s.end(); iter2++){
+        cout << *iter2 << " ";
+    }
+    cout << endl;
+
+    for (auto iter2 = s.rbegin(); iter2 != s.rend(); iter2++){
+        cout << *iter2 << " ";
+    }
+    cout << endl;
+
+    set<int> s2(s);
+    s2.clear();
+    s2.emplace(3);
+    for(int i : s2){cout << i << " ";}
+    cout << endl;
+    
+    s.swap(s2);
+    cout << "------" << endl;
+    for(int i : s){cout << i << " ";} cout << endl;
+    for(int i : s2){cout << i << " ";} cout << endl;
+
+    s2.erase(30);
+    for(int i : s2){cout << i << " ";} cout << endl;
+
+    set<int>::iterator iter3 = s2.find(27); // s.find(key) 찾는 Key값이 있으면, 해당 위치의 Iter 반환, 없으면 s.end()
+    set<int>::iterator iter4 = s2.find(999);
+    cout << *iter3 << endl;
+    cout << *iter4 << endl;
+    cout << *s2.end() << endl; // iter4와 s2.end() 동일
 }
