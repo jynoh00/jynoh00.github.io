@@ -23,7 +23,7 @@ email: wndus123sh@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Per aspera ad astra
 baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://jynoh00.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://jynoh00.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username: jynoh00
 highlighter: rouge
 svg:
