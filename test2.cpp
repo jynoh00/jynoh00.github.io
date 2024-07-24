@@ -1,92 +1,168 @@
 #include <iostream>
-#include <map>
-#include <unordered_map>
+#include <string>
 
 using namespace std;
 
-int main(){
-    //map<int, string> m1;
-    std::map<int, std::string> m2;
-    std::map<std::string, int> m3{
-        {"Kim", 23},
-        {"Lee", 24},
-        {"Noh", 25}
-    };
+class HashNode {
+private:
+    string key;
+    int value;
+    HashNode* nextHash;
+public:
+    HashNode() : nextHash(nullptr) {}
+    HashNode(const string& k, int val) : key(k), value(val), nextHash(nullptr) {}
 
-    std::cout << m3["Lee"] << std::endl; // 24
-    std::cout << m3["Noh"] << std::endl; // 25
-    m3["Noh"] = 20;
-    std::cout << m3["Noh"] << std::endl; // 20
+    HashNode* getNext() { return nextHash; }
+    void setNext(HashNode* node) { nextHash = node; }
+    const string& getKey() { return key; }
+    int getValue() { return value; }
+};
 
-    m3["Park"] = 99; // insert, 없는 key 추가
-    std::cout << m3["Park"] << std::endl;
-
-    m3.insert(std::make_pair("Choi", 29)); // insert, using make_pair
-
-    m3.insert({"hel",52});
-
-    std::pair<std::string, int> p1{"Ho", 66};
-    m3.insert(p1);
-
-    if (m3.find("Ho") != m3.end()){
-        std::cout << "find" << std::endl;
+class HashBucket {
+private:
+    int size;
+    HashNode* head;
+public:
+    HashBucket() : size(0), head(nullptr) { head = new HashNode; }
+    ~HashBucket() {
+        HashNode* node = head;
+        HashNode* next = nullptr;
+        while (node != nullptr) {
+            next = node->getNext();
+            delete node;
+            node = next;
+        }
     }
-    else{
-        std::cout << "not find"<< std::endl;
+
+    bool isEmpty() { return size == 0; }
+    void push(HashNode* val) {
+        HashNode* next = head->getNext();
+        head->setNext(val);
+        val->setNext(next);
+        size++;
+    }
+    HashNode* findNode(const string& key) {
+        HashNode* node = head->getNext();
+        while (node != nullptr) {
+            if (key == node->getKey()) {
+                return node;
+            }
+            node = node->getNext();
+        }
+        return nullptr;
+    }
+    void delNode(const string& key) {
+        HashNode* node = head;
+        HashNode* prev = nullptr;
+
+        while (node != nullptr) {
+            if (node->getKey() == key) {
+                if (prev) {
+                    prev->setNext(node->getNext());
+                } else {
+                    head->setNext(node->getNext());
+                }
+                delete node;
+                size--;
+                return;
+            }
+            prev = node;
+            node = node->getNext();
+        }
     }
 
-    std::cout << "-------" << std::endl;
-    for (std::map<std::string, int>::iterator iter = m3.begin(); iter != m3.end(); iter++){
-        std::cout << iter->first << " " << iter->second << std::endl;
+    void display() {
+        HashNode* node = head->getNext();
+        while (node != nullptr) {
+            cout << node->getValue() << " ";
+            node = node->getNext();
+        }
     }
-    std::cout << "-------" << std::endl;
+};
 
-    std::cout << "-------" << std::endl;
-    for (auto iter : m3){ // auto 정리
-        std::cout << iter.first << " " << iter.second << std::endl;
+class HashTable {
+private:
+    int bucketSize;
+    int size;
+    HashBucket* bucket;
+    int makeHash(const string& key) {
+        int hash = 401; // 소수값
+
+        for (int i = 0; i < key.length(); i++) {
+            hash = (hash << 4) + static_cast<int>(key[i]);
+        }
+
+        return hash % bucketSize;
     }
-    std::cout << "-------" << std::endl;
+public:
+    HashTable() : bucketSize(16), size(0) {
+        bucket = new HashBucket[bucketSize];
+    }
+    HashTable(int bSize) : bucketSize(bSize), size(0) {
+        bucket = new HashBucket[bSize];
+    }
+    ~HashTable() { delete[] bucket; }
 
-    // m3.erase(m3.begin()+2); // why err
+    void insert(const string& key, int val) {
+        int hash = makeHash(key);
+        HashNode* overlap = bucket[hash].findNode(key); // 같은 key값 노드가 있는 지 확인
 
-    m3.erase("Noh");
+        if (overlap != nullptr) {
+            return;
+        }
+        bucket[hash].push(new HashNode(key, val));
+    }
+    void del(const string& key) {
+        int hash = makeHash(key);
+        bucket[hash].delNode(key);
+    }
+    int find(const string& key) {
+        int hash = makeHash(key);
+        HashNode* find = bucket[hash].findNode(key);
 
-    // clear all
-    m3.erase(m3.begin(), m3.end());
-    m3.clear();
+        if (find == nullptr) return -1;
+        return find->getValue();
+    }
+    int operator[](const string& key) {
+        int hash = makeHash(key);
+        HashNode* find = bucket[hash].findNode(key);
 
-    unordered_map<int,int> m4;
-    m4.insert({2, 3});
-    cout << m4[2] << endl;
+        if (find == nullptr) {
+            return -1;
+        }
+        return find->getValue();
+    }
+    void display() {
+        for (int i = 0; i < bucketSize; i++) {
+            bucket[i].display();
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    HashTable ht(10);
+
+    ht.insert("key1", 10);
+    ht.insert("key2", 20);
+    ht.insert("key3", 30);
+    ht.insert("key4", 40);
+
+    cout << "Hash Table: " << endl;
+    ht.display();
+
+    cout << "Finding key1: " << ht.find("key1") << endl;
+    cout << "Finding key2: " << ht.find("key2") << endl;
+    cout << "Finding key3: " << ht.find("key3") << endl;
+    cout << "Finding key5: " << ht.find("key5") << endl; // This key does not exist
+
+    ht.del("key2");
+    cout << "Hash Table:" << endl;
+    ht.display();
+
+    cout << "Finding key2: " << ht.find("key2") << endl; // 값이 없을 때
+
+    cout << ht["key3"] << endl;
+
+    return 0;
 }
-
-/*
-
-Associative container - map
-
-key -> data search can
-(python - ditionary와 유사)
-
-balanced binary tree, hashset
-연산 빠름
-
-map => #include <map> // 요소 정렬, 중복 허용 x
-unordered_map => #include <unordered_map> // 요소 정렬 x
-multimap => #include <map> // 중복된 요소 허용
-unordered_multimap => #include <unordered_map> // 요소 정렬 x, 중복된 요소 허용
-
-key - value 쌍으로 저장
-key 값에 따라 정렬
-key 중복 불가
-key로 직접 접근 가능
-반복자가 유효하지 않을 수 있다.
-
-
-  key   value
---------------
-| Kim  | 20  |
---------------
-
-
-
-*/
